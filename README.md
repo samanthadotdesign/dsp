@@ -1,1 +1,1 @@
-# Rocket Academy Coding Bootcamp: React Hotpot
+# Designer Starter Pack
