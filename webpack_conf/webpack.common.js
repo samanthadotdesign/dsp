@@ -21,6 +21,16 @@ module.exports = {
           'sass-loader',
         ],
       },
+      {
+        test: /\.html$/,
+        use: ['html-loader'],
+      },
+      {
+        test: /\.(svg|png|jpg|gif)$/i,
+        use: {
+          loader: 'file-loader',
+        },
+      },
     ],
   },
 };

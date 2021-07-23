@@ -1,9 +1,29 @@
 import { resolve } from 'path';
-import db from './models/index.mjs';
+import db from './db/models/index.mjs';
+import initDashboardController from './controllers/dashboards.mjs';
+// import initSkillController from './controllers/skills.mjs';
+// import initUserController from './controllers/users.mjs';
 
-export default function routes(app) {
-  // special JS page. Include the webpack index.html file
+export default function bindRoutes(app) {
+  const DashboardController = initDashboardController(db);
+
   app.get('/home', (request, response) => {
     response.sendFile(resolve('dist', 'main.html'));
   });
+
+  // const SkillController = initSkillController(db);
+  // const UserController = initUserController(db);
+  // const ContributeController = initContributeCountroller();
+
+  app.get('/data', DashboardController.index);
+
+  // app.put('/complete-skill/:id', SkillController.index);
+  // app.put('/uncomplete-skill/:id', SkillController.remove);
+
+  // app.post('/signup', UserController.signup);
+  // app.post('/login', UserController.login);
+  // app.get('/logout', UserController.logout);
+
+  // app.get('about', ContributeController.index);
+  // app.get('/contribute', ContributeController.form);
 }
