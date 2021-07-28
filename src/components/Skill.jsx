@@ -1,29 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 
-// I only want skills for that section => pass in the prop sectionId into Skill component
-export default function Skill({ skills }) {
-  // Need to keep track of skill completed/uncompleted for UI
-
-  return skills.map((skill) => (
+export default function Skill({
+  skillName, skillImg, skillCompleted,
+}) {
+  return (
     <>
       <figure>
         <img
-          src={skill.skillImg}
-          alt={skill.skillName}
+          src={skillImg}
+          alt={skillName}
+          className={skillCompleted ? 'colored' : 'muted'}
         />
-        <figcaption>{skill.skillName}</figcaption>
+        <figcaption>{skillName}</figcaption>
       </figure>
     </>
-  ));
+  );
 }
-
-/*
-- getDashboardData -> all the data (skills, categories, etc.)
-- skills -> skill_img, skill_name
-
-- uncompleted / completed
-
-- skills, sections
-- section component -> map skill component
-*/

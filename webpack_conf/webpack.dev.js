@@ -7,7 +7,9 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   entry: {
+    // Pointing webpack to the jsx files (chunks in HTMLwebpackplugin )
     main: ['webpack-hot-middleware/client', './src/index.jsx'],
+    homepage: ['webpack-hot-middleware/client', './src/homepage.jsx'],
   },
   mode: 'development',
   devtool: 'inline-source-map',
@@ -40,6 +42,13 @@ module.exports = merge(common, {
       // name this file main, so that it does not get automatically requested as a static file
       filename: './main.html',
       template: path.resolve(__dirname, '..', 'src', 'index.html'),
+      chunks: ['main'],
+    }),
+    new HtmlWebpackPlugin({
+      // name this file main, so that it does not get automatically requested as a static file
+      filename: './homepage.html',
+      template: path.resolve(__dirname, '..', 'src', 'homepage.html'),
+      chunks: ['homepage'],
     }),
 
   ].filter(Boolean),

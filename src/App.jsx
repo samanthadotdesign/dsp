@@ -1,15 +1,19 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Section from './components/Section.jsx';
-// import Skill from './components/Skill.jsx';
+// import { GlobalStyle } from './styles.js';
+import Modal from './components/Modal/index.jsx';
+import ModalInner from './components/ModalInner/index.jsx';
 
 export default function App() {
-  const [sections, setSections] = useState();
-  const [categories, setCategories] = useState();
-  const [skills, setSkills] = useState();
-  const [resources, setResources] = useState();
-  const [categoriesCompleted, setCategoriesCompleted] = useState();
-  const [skillsCompleted, setSkillsCompleted] = useState();
+  const [sections, setSections] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [skills, setSkills] = useState([]);
+  const [resources, setResources] = useState([]);
+  const [categoriesCompleted, setCategoriesCompleted] = useState([]);
+  const [skillsCompleted, setSkillsCompleted] = useState([]);
+
+  const [showModal, setShowModal] = useState(false);
 
   // Initializes on load all the info from the database
   useEffect(() => {
@@ -23,6 +27,7 @@ export default function App() {
         skillsCompleted: appSkillsCompleted,
       } = result.data;
 
+      console.log(appSkills);
       setSections(appSections);
       setCategories(appCategories);
       setSkills(appSkills);
@@ -32,32 +37,24 @@ export default function App() {
     });
   }, []);
 
-  const result = typeof sections;
-  console.log(sections);
-  return (<div />
-  // sections.map((section) => (
-  //   <Section id={section.id} sectionName={section.sectionName} />
-  // ))
-  // <Skill skills={skills} />
+  const toggleModal = () => {
+    setShowModal((showModal) => !showModal);
+  };
+
+  return (
+    <>
+      <button type="button" onClick={toggleModal}>Sign up</button>
+      {showModal && (
+      <Modal toggleModal={toggleModal}>
+        <ModalInner />
+      </Modal>
+      )}
+      <div>
+        {/* <GlobalStyle /> */}
+        {sections && sections.map((section) => (
+          <Section id={section.id} sectionName={section.sectionName} skills={skills} />
+        ))}
+      </div>
+    </>
   );
 }
-
-/*
-<App/>
-- <Section/>
-  - section title
-  - grid
-- <Skill/>
-    - useEffect => initializing when all the images show up for the first time
-    => sets state based on what comes from database for that user
-
-    - boolean to show muted / colored
-
-    - <Resource/>
-        - list of skills
-        - Mark skill complete/uncomplete btn
-        - <Add/> (in the future)
-- <Category/>
-  - badgeState = [ 1, 2, 3 ... ]
-
-*/

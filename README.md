@@ -1,4 +1,5 @@
 # Designer Starter Pack
+<<<<<<< HEAD
 
 ## :seedling: Background
 
@@ -49,3 +50,5 @@ _or view the [Figma prototype](https://www.figma.com/proto/TiH1DMdEklZRkH2A9zgZi
 ## :construction: ERD
 
 ![ERD (8)](https://user-images.githubusercontent.com/31368622/121108166-d9584b00-c83b-11eb-892a-1139d9de9112.png)
+=======
+>>>>>>> a9df3df3f30ac44fb67f408982d965850112a97a
