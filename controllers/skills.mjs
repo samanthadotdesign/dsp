@@ -57,7 +57,6 @@ export default function initSkillController(db) {
           await category.removeUser(user);
         }
       }
-
       res.sendStatus(200);
     } catch (error) {
       console.log(error);

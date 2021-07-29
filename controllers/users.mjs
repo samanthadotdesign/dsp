@@ -16,11 +16,21 @@ export default function initUserController(db) {
       });
 
       // When new user signs up, we create all the skills for that user (completed=False)
+      const skills = await db.Skill.findAll();
+
+      // bulkSkills is an array of objects
+      const bulkSkills = [];
+      for (let i = 0; i < skills.length; i += 1) {
+        bulkSkills.push({ userId: newUser.id, skillId: skills[i].id });
+      }
+
+      await db.UserSkill.bulkCreate(bulkSkills);
 
       res.cookie('loggedIn', true);
       res.cookie('userId', newUser.id);
       res.sendStatus(200);
     } catch (error) {
+      console.log(error);
       res.sendStatus(401);
     }
   };

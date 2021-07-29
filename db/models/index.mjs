@@ -7,6 +7,7 @@ import initSectionModel from './section.mjs';
 import initCategoryModel from './category.mjs';
 import initSkillModel from './skill.mjs';
 import initResourceModel from './resource.mjs';
+import initUserSkillModel from './userSkill.mjs';
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -27,6 +28,7 @@ db.Section = initSectionModel(sequelize, Sequelize.DataTypes);
 db.Category = initCategoryModel(sequelize, Sequelize.DataTypes);
 db.Skill = initSkillModel(sequelize, Sequelize.DataTypes);
 db.Resource = initResourceModel(sequelize, Sequelize.DataTypes);
+db.UserSkill = initUserSkillModel(sequelize, Sequelize.DataTypes);
 
 // Defining the relationship
 // user_skills join table
