@@ -74,7 +74,7 @@ export default function initUserController(db) {
       // delete cookies
       res.clearCookie('loggedIn');
       res.clearCookie('userId');
-      res.redirect('/');
+      res.sendStatus(200);
     } catch (error) {
       console.log('error logging out', error);
     }

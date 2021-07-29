@@ -14,13 +14,10 @@ const getDashboardData = async (db, userId) => {
     // user_skills
     // db.Skill --> query the 'skills table'
     // Include: find the skills with the userId
-    const skillsCompleted = await db.Skill.findAll({
-      include: {
-        // From the users table, find the PK
-        model: db.User,
-        where: {
-          id: userId,
-        },
+    const skillsCompleted = await db.UserSkill.findAll({
+      where: {
+        id: userId,
+        completed: true,
       },
     });
 
@@ -73,19 +70,16 @@ export default function initDashboardController(db) {
         categoryIds.push(categoriesInSection[i].id);
       }
 
-      const skillsCompleted = await db.Skill.findAll({
-        include: {
-        // From the users table, find the PK
-          model: db.User,
-          where: {
-            id: userId,
-          },
+      const skillsCompleted = await db.UserSkill.findAll({
+        where: {
+          userId,
+          completed: true,
         },
       });
 
       const skillIdsCompleted = [];
       for (let i = 0; i < skillsCompleted.length; i += 1) {
-        skillIdsCompleted.push(skillsCompleted[i].id);
+        skillIdsCompleted.push(skillsCompleted[i].skillId);
       }
 
       res.send({ categoryIds, skillIdsCompleted });

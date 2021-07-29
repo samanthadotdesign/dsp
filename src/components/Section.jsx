@@ -14,7 +14,6 @@ export default function Section({ id, sectionName, skills }) {
   // For each section, get all the categoryId
   // section 0 = [0], section 1 = [1, 2, 3], section 2 = [4, 5]
   useEffect(() => {
-    console.log(id);
     axios.get(`/category-id/${id}`).then((result) => {
       const { categoryIds, skillIdsCompleted } = result.data;
 
@@ -36,18 +35,6 @@ export default function Section({ id, sectionName, skills }) {
       setResourceSkill(result.data);
     });
   }, []);
-
-  // On hovering the skill component, show the resource div
-  // Conditionally showing resource div using state
-  console.log(sectionSkills);
-  const handleResourceMouseOver = (e, skill) => {
-    console.log('mouseover');
-    setResourceVisible(true);
-  };
-  const handleResourceMouseOut = () => {
-    console.log('mouseout');
-    setResourceVisible(false);
-  };
 
   return (
     <>

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React from 'react';
 
+// skillCompleted is a boolean describing if the skill is completed or not
+// skillCompletedArr is array of skillIds of completed skills
 export default function Resource({
   skillId, skillName, resources, skillCompletedArr, skillCompleted, setSkillCompleted,
 }) {

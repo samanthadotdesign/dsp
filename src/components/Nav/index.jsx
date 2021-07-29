@@ -16,7 +16,8 @@ export default function Nav({ loggedIn, toggleLogInModal, toggleSignUpModal }) {
 
         {!loggedIn && <Button message="Sign up" onSubmit={toggleSignUpModal} />}
 
-        {loggedIn && (
+        {loggedIn
+        && (
         <Button
           message="Log out"
           onSubmit={handleLogOutSubmit}
