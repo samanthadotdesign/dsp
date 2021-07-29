@@ -5,7 +5,7 @@ export const Container = styled.div`
   max-width: 440px;
 `;
 
-export const SuccessContainer = styled(Container)`
+export const CenterContainer = styled(Container)`
   align-items: center;
   display: flex;
   flex-direction: column;

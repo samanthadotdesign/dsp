@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+// Will be deprecated (combining it with Modal + Form only )
+import React from 'react';
 import {
-  Container, SuccessContainer, H3, H4, P,
+  Container, H3, H4, P,
 } from './styles.js';
-import Form from '../Form/index.jsx';
+import { SignUpForm, LogInForm } from '../Form/index.jsx';
 
 const Input = ({ handleSuccess }) => (
   <Container>
@@ -10,25 +11,11 @@ const Input = ({ handleSuccess }) => (
     <P>
       Join Designer Starter Pack
     </P>
-    <Form handleSuccess={handleSuccess} />
+    <SignUpForm />
   </Container>
 );
 
-const Success = () => (
-  <SuccessContainer>
-    <H4>Yay! We're so excited!</H4>
-    <P>
-      We hope you are too. In the meantime you go check out some skills.
-    </P>
-  </SuccessContainer>
-);
-
-const ModalInner = () => {
-  const [showSuccess, setShowSuccess] = useState(false);
-
-  const handleSuccess = () => setShowSuccess(true);
-
-  return showSuccess ? <Success /> : <Input handleSuccess={handleSuccess} />;
-};
+// Inner modal
+const ModalInner = () => (showSuccess ? <Success /> : <Input handleSuccess={handleSuccess} />);
 
 export default ModalInner;

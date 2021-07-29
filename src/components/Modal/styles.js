@@ -12,7 +12,6 @@ export const BG = styled.div`
 
 export const Modal = styled.div`
   ${AbsoluteCenter}
-  animation: glow 1s forwards;
   background: #fbfbfb;
   box-sizing: border-box;
   padding: 60px;

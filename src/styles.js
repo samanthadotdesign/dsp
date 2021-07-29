@@ -24,3 +24,6 @@ export const AbsoluteCenter = css`
   position: absolute;
   transform: translate(-50%, -50%);
 `;
+
+export const Button = styled.button`
+`;
