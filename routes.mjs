@@ -7,18 +7,8 @@ import initUserController from './controllers/users.mjs';
 export default function bindRoutes(app) {
   const DashboardController = initDashboardController(db);
 
-  app.get('/home', (request, response) => {
-    // If user is logged in, send to dashboard
-    const { userId } = request.cookies;
-
-    if (userId) {
-      response.sendFile(resolve('dist', 'main.html'));
-    }
-
-    else {
-    // If user is not logged in, send to homepage
-      response.sendFile(resolve('dist', 'homepage.html'));
-    }
+  app.get('/', (request, response) => {
+    response.sendFile(resolve('dist', 'main.html'));
   });
 
   const SkillController = initSkillController(db);
@@ -32,7 +22,7 @@ export default function bindRoutes(app) {
 
   app.post('/signup', UserController.signup);
   app.post('/login', UserController.login);
-  app.get('/logout', UserController.logout);
+  app.post('/logout', UserController.logout);
 
   // app.get('about', ContributeController.index);
   // app.get('/contribute', ContributeController.form);

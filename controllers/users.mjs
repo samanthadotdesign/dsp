@@ -9,15 +9,19 @@ export default function initUserController(db) {
       const hashedPassword = await bcrypt.hash(userPassword, 10);
 
       // create new instance for the user
-      await db.User.create({
+      const newUser = await db.User.create({
         name,
         email,
         password: hashedPassword,
       });
 
-      res.redirect('/');
+      // When new user signs up, we create all the skills for that user (completed=False)
+
+      res.cookie('loggedIn', true);
+      res.cookie('userId', newUser.id);
+      res.sendStatus(200);
     } catch (error) {
-      console.log('error signing up', error);
+      res.sendStatus(401);
     }
   };
 
@@ -43,11 +47,11 @@ export default function initUserController(db) {
         }
         res.cookie('loggedIn', true);
         res.cookie('userId', user.id);
-        res.redirect('/');
+        res.sendStatus(200);
       } else {
         // If user doesn't exist
         console.log('We couldn\'t find your email. If you can\'t remember your account, we can send you a reminder.');
-        res.sendStatus(403);
+        res.sendStatus(401);
       }
     } catch (error) {
       console.log('error logging in', error);

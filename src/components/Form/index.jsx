@@ -21,7 +21,7 @@ const InputComponent = ({ label, ...props }) => {
 };
 
 // Sign up modal
-export const SignUpForm = () => {
+export const SignUpForm = ({ setLoggedIn, toggleSignUpModal }) => {
   const schema = Yup.object().shape({
     name: Yup.string().required('Required field'),
     email: Yup.string().email('Must be a valid email address').required('Required field'),
@@ -29,9 +29,16 @@ export const SignUpForm = () => {
   });
 
   // Send to database
+  // values = {name... email...password }
   const handleSignUpSubmit = (values) => {
-    console.log(values);
-    axios.post('/signup');
+    axios.post('/signup', values).then((result) => {
+      // result.data will give us the status codes
+      if (result.data === 'OK') {
+        toggleSignUpModal();
+        setLoggedIn(true);
+      }
+      // Handle incorrect signup
+    });
   };
 
   return (
@@ -50,7 +57,7 @@ export const SignUpForm = () => {
           <Form>
             <InputComponent name="name" type="text" label="Name" autoComplete="off" />
             <InputComponent name="email" type="email" label="Email" autoComplete="off" />
-            <InputComponent name="password" type="text" label="Password" autoComplete="off" />
+            <InputComponent name="password" type="password" label="Password" autoComplete="off" />
             <Submit type="submit">Submit</Submit>
           </Form>
         )}
@@ -59,7 +66,7 @@ export const SignUpForm = () => {
   );
 };
 
-export const LogInForm = () => {
+export const LogInForm = ({ setLoggedIn, toggleLogInModal }) => {
   const schema = Yup.object().shape({
     email: Yup.string().email('Must be a valid email address').required('Required field'),
     password: Yup.string().required('Required field'),
@@ -67,8 +74,13 @@ export const LogInForm = () => {
 
   // Send to database
   const handleLogInSubmit = (values) => {
-    console.log(values);
-    axios.post('/login');
+    axios.post('/login', values).then((result) => {
+      if (result.data === 'OK') {
+        toggleLogInModal();
+        setLoggedIn(true);
+      }
+      // Handling the errors for not correct login
+    });
   };
 
   return (
@@ -85,7 +97,7 @@ export const LogInForm = () => {
         {() => (
           <Form>
             <InputComponent name="email" type="email" label="Email" autoComplete="off" />
-            <InputComponent name="password" type="text" label="Password" autoComplete="off" />
+            <InputComponent name="password" type="password" label="Password" autoComplete="off" />
             <Submit type="submit">Submit</Submit>
           </Form>
         )}
