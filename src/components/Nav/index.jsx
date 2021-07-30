@@ -1,29 +1,72 @@
 import axios from 'axios';
 import React from 'react';
-import Button from '../Button.jsx';
+import { Helmet } from 'react-helmet';
+import logo from '../../../public/assets/logo.svg';
+import {
+  Button, NavBar, NavLinks, Logo,
+} from './styles.js';
 
-export default function Nav({ loggedIn, toggleLogInModal, toggleSignUpModal }) {
+export default function Nav({
+  loggedIn, toggleLogInModal, toggleSignUpModal, setLoggedIn,
+}) {
   // Pass in "loggedIn" and use it to conditionally render buttons using ternary statement
 
   const handleLogOutSubmit = () => {
-    axios.post('/logout');
+    axios.post('/logout').then((result) => {
+      if (result.data === 'OK') {
+        setLoggedIn(false);
+      }
+      // Error handling if the user is unable to log out
+    });
   };
 
   return (
     <>
-      <nav>
-        {!loggedIn && <Button message="Log in" onSubmit={toggleLogInModal} />}
+      <NavBar>
 
-        {!loggedIn && <Button message="Sign up" onSubmit={toggleSignUpModal} />}
+        <Helmet>
+          <script type="text/javascript" async="true" src="./scrolled.js" />
+        </Helmet>
 
-        {loggedIn
+        <Logo src={logo} />
+
+        <NavLinks>
+          <Button
+            type="button"
+          >
+            About
+          </Button>
+          {!loggedIn
         && (
         <Button
-          message="Log out"
-          onSubmit={handleLogOutSubmit}
-        />
+          type="button"
+          onClick={toggleLogInModal}
+        >
+          Log In
+        </Button>
         )}
-      </nav>
+
+          {!loggedIn
+        && (
+        <Button
+          type="button"
+          onClick={toggleSignUpModal}
+        >
+          Sign up
+        </Button>
+        )}
+
+          {loggedIn
+        && (
+        <Button
+          type="button"
+          onClick={handleLogOutSubmit}
+        >
+          Log out
+        </Button>
+        )}
+        </NavLinks>
+      </NavBar>
     </>
   );
 }

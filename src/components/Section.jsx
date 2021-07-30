@@ -3,7 +3,9 @@ import axios from 'axios';
 import Skill from './Skill.jsx';
 import Resource from './Resource.jsx';
 
-export default function Section({ id, sectionName, skills }) {
+export default function Section({
+  id, sectionName, skills, categoriesCompleted, setCategoriesCompleted,
+}) {
   // sectionSkills = [ { skillName: ..., skillImg: ..., completed: True }, {} ]
   const [sectionSkills, setSectionSkills] = useState([]);
   const [resourceSkills, setResourceSkill] = useState([]);
@@ -57,7 +59,9 @@ export default function Section({ id, sectionName, skills }) {
                 resources={resourceSkills[skill.id]}
                 skillCompletedArr={skillCompletedArr}
                 skillCompleted={skillCompletedArr.includes(skill.id)}
+                categoriesCompleted={categoriesCompleted}
                 setSkillCompleted={setSkillCompleted}
+                setCategoriesCompleted={setCategoriesCompleted}
               />
               )}
             </div>

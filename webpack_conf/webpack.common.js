@@ -26,13 +26,20 @@ module.exports = {
         use: ['html-loader'],
       },
       {
-        test: /\.(svg|png|jpg|gif)$/i,
+        test: /\.(png|jpg|gif)$/i,
         use: {
           loader: 'file-loader',
         },
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.svg$/i,
+        use:
+          {
+            loader: 'svg-url-loader',
+          },
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         use: {
           loader: 'file-loader',
 

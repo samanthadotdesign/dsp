@@ -1,23 +1,44 @@
 import axios from 'axios';
 import React from 'react';
 
+// Add resource emoji
+
 // skillCompleted is a boolean describing if the skill is completed or not
 // skillCompletedArr is array of skillIds of completed skills
 export default function Resource({
-  skillId, skillName, resources, skillCompletedArr, skillCompleted, setSkillCompleted,
+  skillId, skillName, resources, skillCompletedArr, skillCompleted, setSkillCompleted, categoriesCompleted, setCategoriesCompleted,
 }) {
   const handleClick = () => {
-    axios.put('/skill', { skillId, skillCompleted }).then(() => {
-      // If skill is complete, the copy is Uncomplete Skill
+    axios.put('/skill', { skillId, skillCompleted }).then((result) => {
+      const { currentCategoryId, currentCategory, categoryIsComplete } = result.data;
+
+      /* If the skill is already completed before the handleClick,
+      the user is clicking to "uncomplete" the skill */
       if (skillCompleted) {
-        const result = skillCompletedArr.filter((id) => id != skillId);
-        setSkillCompleted(result);
+        const skillsArray = skillCompletedArr.filter((id) => id != skillId);
+        setSkillCompleted(skillsArray);
+
+        // categoriesCompleted is an array of objects
+        if (!categoryIsComplete) {
+          const categoriesArray = categoriesCompleted.filter((category) => category.id != currentCategoryId);
+          setCategoriesCompleted(categoriesArray);
+        }
+
+      /* If the skill is not yet completed,
+      the user is clicking to "complete skill */
       } else {
         setSkillCompleted([...skillCompletedArr, skillId]);
+
+        /* categoryIsComplete comes from the backend response
+        If categoryIsComplete, add new categoryId to the categoriesCompleted */
+        if (categoryIsComplete) {
+          setCategoriesCompleted([...categoriesCompleted, currentCategory]);
+        }
       }
     });
   };
 
+  // If skill is complete, the copy is Uncomplete Skill
   return (
     <div
       className="resource"
@@ -32,7 +53,11 @@ export default function Resource({
           </li>
         ))}
       </ul>
-      <button onClick={handleClick}>{skillCompleted ? 'Uncomplete Skill' : 'Complete Skill'}</button>
+      <button
+        onClick={handleClick}
+      >
+        {skillCompleted ? 'Uncomplete Skill' : 'Complete Skill'}
+      </button>
     </div>
   );
 }

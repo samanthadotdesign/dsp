@@ -6,6 +6,7 @@ export const BG = styled.div`
   cursor: pointer;
   height: 100vh;
   position: fixed;
+  top: 0;
   width: 100vw;
   z-index: 2;
 `;
@@ -18,6 +19,7 @@ export const Modal = styled.div`
   max-width: 800px;
   width: calc(100vw - 60px);
   z-index: 3;
+
   @media (max-width: 700px) {
     padding: 30px;
     width: calc(100vw - 30px);
@@ -25,6 +27,7 @@ export const Modal = styled.div`
 `;
 
 export const Close = styled.button`
+  outline: none;
   background: none;
   border: 0;
   cursor: pointer;
@@ -34,11 +37,12 @@ export const Close = styled.button`
   right: 60px;
   top: 60px;
   width: 30px;
+
   &:before,
   &:after {
-    background-color: #0519ce;
+    background-color: #ccc;
     content: ' ';
-    height: 33px;
+    height: 18px;
     left: 15px;
     position: absolute;
     top: 0;

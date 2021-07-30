@@ -59,12 +59,16 @@ export default function App() {
         loggedIn={loggedIn}
         toggleLogInModal={toggleLogInModal}
         toggleSignUpModal={toggleSignUpModal}
+        setLoggedIn={setLoggedIn}
       />
 
       {loggedIn && (
       <Dashboard
         sections={sections}
         skills={skills}
+        categoriesCompleted={categoriesCompleted}
+        setCategoriesCompleted={setCategoriesCompleted}
+
       />
       )}
       {!loggedIn && (

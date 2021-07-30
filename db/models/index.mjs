@@ -37,6 +37,11 @@ db.UserSkill = initUserSkillModel(sequelize, Sequelize.DataTypes);
 db.Skill.belongsToMany(db.User, { through: 'user_skills' });
 db.User.belongsToMany(db.Skill, { through: 'user_skills' });
 
+// Relationship between UserSkill and Skill
+// One Skill has many UserSkills
+db.Skill.hasMany(db.UserSkill);
+db.UserSkill.belongsTo(db.Skill);
+
 // user_categories join table
 db.User.belongsToMany(db.Category, { through: 'user_categories' });
 db.Category.belongsToMany(db.User, { through: 'user_categories' });

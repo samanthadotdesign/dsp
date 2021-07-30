@@ -77,6 +77,7 @@ export default function initUserController(db) {
       res.sendStatus(200);
     } catch (error) {
       console.log('error logging out', error);
+      res.sendStatus(401);
     }
   };
 

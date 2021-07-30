@@ -7,79 +7,75 @@ export default function initSkillController(db) {
     const { userId } = req.cookies;
 
     try {
+      let categoryIsComplete = false;
       const currentSkill = await db.Skill.findByPk(skillId);
-
-      const skillObjectCompleted = await db.UserSkill.findAll({
-        where: {
-          userId,
-          completed: true,
-        },
-        include:
-          {
-            model: db.Skill,
-            where: {
-              categoryId: currentSkill.categoryId,
-            },
-          },
-      });
-
-      console.log(skillObjectCompleted);
+      const currentUser = await db.User.findByPk(userId);
+      const currentCategoryId = currentSkill.categoryId;
+      const currentCategory = await db.Category.findByPk(currentCategoryId);
 
       // For existing row in user_skill join table, update 'completed' as true
-
       // Find the instance of the user skill
-      // const userCompleteSkill = await db.UserSkill.findOne({
-      //   where: {
-      //     userId,
-      //     skillId,
-      //   },
-      // });
+      const userCompleteSkill = await db.UserSkill.findOne({
+        where: {
+          userId,
+          skillId,
+        },
+      });
 
-      // // If the user hasn't completed the skill, update to true
-      // if (userCompleteSkill.completed === false) {
-      //   // Save the updated userSkill
-      //   userCompleteSkill.completed = true;
-      //   await userCompleteSkill.save();
+      // Check if the category is complete
+      // Count the number of completed skills in that category
+      const skillsInCategoryCount = await db.Skill.count({
+        where: { categoryId: currentCategoryId },
+      });
 
-      //   // Check if the category is complete
-      //   const skillsInCategoryCount = await db.Skill.count({
-      //     where: { categoryId: currentSkill.categoryId },
-      //   });
+      // If the user hasn't completed the skill, update to true
+      if (!skillCompleted) {
+        // Save the updated userSkill
+        userCompleteSkill.completed = true;
+        await userCompleteSkill.save();
 
-      //   // Count the number of completed skills in that category
-      //   // For each completed skill by the user
-      //   const userSkillsInCategory = [];
+        // Find the number of skills user has completed in that category
+        const skillObjectCompleted = await db.Skill.findAll({
+          where: {
+            categoryId: currentCategoryId,
+          },
+          include: {
+            model: db.UserSkill,
+            where: {
+              userId,
+              completed: true,
+            },
+          },
+        });
 
-      //   for (let i = 0; i < skillCompletedArr.length; i += 1) {
-      //     if (skillCompletedArr.categoryId === currentSkill.categoryId) {
-      //       userSkillsInCategory.push(skillCompletedArr[i]);
-      //     }
-      //   }
-      //   console.log('************');
-      //   console.log(userSkillsInCategory);
-      // }
+        const userSkillsInCategoryCount = skillObjectCompleted.length;
 
-      // const userSkillsInCategoryCount = userSkillsInCategory.length;
+        // If category is complete, mark category as complete
+        if (skillsInCategoryCount === userSkillsInCategoryCount) {
+          console.log('running if statement');
+          // add a new row in user_categories table
+          // first find instance of the category
+          const category = await db.Category.findByPk(currentCategoryId);
+          await category.addUser(currentUser);
+          categoryIsComplete = true;
+        }
+      }
 
-      // // if category is complete, mark category as complete
-      // if (skillsInCategoryCount == userSkillsInCategoryCount) {
-      //   console.log('running if statement');
-      //   // add a new row in user_categories table
-      //   // first find instance of the category
-      //   const category = await db.Category.findByPk(skill.categoryId);
-      //   await category.addUser(user);
-      // }
-      // }
-      // else {
-      //   // Removes skill from user, removes category if exists
-      //   await skill.removeUser(user);
+      // If the user has completed the skill, update to false
+      else {
+        // Save the updated userSkill
+        userCompleteSkill.completed = false;
+        await userCompleteSkill.save();
 
-      //   const category = await db.Category.findByPk(skill.categoryId);
-      //   if (category) {
-      //     await category.removeUser(user);
-      //   }
-      // }
-      res.sendStatus(200);
+        // Removes category if exists in user_categories
+        const category = await db.Category.findByPk(currentCategoryId);
+        if (category) {
+          await category.removeUser(currentUser);
+          categoryIsComplete = false;
+        }
+      }
+
+      res.send({ currentCategoryId, currentCategory, categoryIsComplete });
     } catch (error) {
       console.log(error);
     }
