@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Skill from './Skill.jsx';
-import Resource from './Resource.jsx';
+import Skill from '../Skill/index.jsx';
+import Resource from '../Resource/Resource.jsx';
 
 export default function Section({
   id, sectionName, skills, categoriesCompleted, setCategoriesCompleted,
 }) {
   // sectionSkills = [ { skillName: ..., skillImg: ..., completed: True }, {} ]
   const [sectionSkills, setSectionSkills] = useState([]);
-  const [resourceSkills, setResourceSkill] = useState([]);
+  const [resourceSkills, setResourceSkills] = useState([]);
   const [resourceVisible, setResourceVisible] = useState(true);
   const [skillCompletedArr, setSkillCompleted] = useState([]);
 
@@ -34,7 +34,7 @@ export default function Section({
   // Find the resources via skill id
   useEffect(() => {
     axios.get('/resources').then((result) => {
-      setResourceSkill(result.data);
+      setResourceSkills(result.data);
     });
   }, []);
 
@@ -56,7 +56,8 @@ export default function Section({
               <Resource
                 skillId={skill.id}
                 skillName={skill.skillName}
-                resources={resourceSkills[skill.id]}
+                resourceSkills={resourceSkills}
+                setResourceSkills={setResourceSkills}
                 skillCompletedArr={skillCompletedArr}
                 skillCompleted={skillCompletedArr.includes(skill.id)}
                 categoriesCompleted={categoriesCompleted}

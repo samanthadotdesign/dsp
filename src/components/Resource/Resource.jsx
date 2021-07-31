@@ -1,13 +1,19 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
+import ResourceForm from './ResourceForm.jsx';
 
 // Add resource emoji
+
+// resourceSkill is only for this particular skillId
 
 // skillCompleted is a boolean describing if the skill is completed or not
 // skillCompletedArr is array of skillIds of completed skills
 export default function Resource({
-  skillId, skillName, resources, skillCompletedArr, skillCompleted, setSkillCompleted, categoriesCompleted, setCategoriesCompleted,
+  skillId, skillName, resourceSkills, setResourceSkills, skillCompletedArr, skillCompleted, setSkillCompleted, categoriesCompleted, setCategoriesCompleted,
 }) {
+  const [resourceForm, setResourceForm] = useState(false);
+  const resourcesForSkillId = resourceSkills[skillId];
+
   const handleClick = () => {
     axios.put('/skill', { skillId, skillCompleted }).then((result) => {
       const { currentCategoryId, currentCategory, categoryIsComplete } = result.data;
@@ -38,6 +44,11 @@ export default function Resource({
     });
   };
 
+  // Add the new inline fields for user to add the resource
+  const handleShowForm = () => {
+    setResourceForm(true);
+  };
+
   // If skill is complete, the copy is Uncomplete Skill
   return (
     <div
@@ -45,7 +56,7 @@ export default function Resource({
     >
       <h2>{skillName}</h2>
       <ul>
-        {resources && resources.map((resource) => (
+        {resourcesForSkillId && resourcesForSkillId.map((resource) => (
           <li>
             <a href={resource.link} target="_blank">
               {resource.name}
@@ -53,6 +64,24 @@ export default function Resource({
           </li>
         ))}
       </ul>
+
+      {resourceForm
+      && (
+      <ResourceForm
+        resourceSkills={resourceSkills}
+        setResourceSkills={setResourceSkills}
+        skillId={skillId}
+        setResourceForm={setResourceForm}
+      />
+      )}
+
+      <button
+        type="button"
+        onClick={handleShowForm}
+      >
+        Add Resource
+      </button>
+
       <button
         onClick={handleClick}
       >

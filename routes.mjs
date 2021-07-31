@@ -3,6 +3,7 @@ import db from './db/models/index.mjs';
 import initDashboardController from './controllers/dashboards.mjs';
 import initSkillController from './controllers/skills.mjs';
 import initUserController from './controllers/users.mjs';
+import initResourceController from './controllers/resources.mjs';
 
 export default function bindRoutes(app) {
   const DashboardController = initDashboardController(db);
@@ -13,6 +14,7 @@ export default function bindRoutes(app) {
 
   const SkillController = initSkillController(db);
   const UserController = initUserController(db);
+  const ResourceController = initResourceController(db);
   // const ContributeController = initContributeCountroller();
 
   app.get('/data', DashboardController.index);
@@ -23,7 +25,9 @@ export default function bindRoutes(app) {
   app.post('/signup', UserController.signup);
   app.post('/login', UserController.login);
   app.post('/logout', UserController.logout);
+  app.get('/auth', UserController.index);
 
+  app.post('/add-resource', ResourceController.index);
   // app.get('about', ContributeController.index);
   // app.get('/contribute', ContributeController.form);
 }

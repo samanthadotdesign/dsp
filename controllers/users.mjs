@@ -1,6 +1,17 @@
 import bcrypt from 'bcrypt';
 
 export default function initUserController(db) {
+  // Checks if user has been logged in on page load
+  const index = (req, res) => {
+    const { loggedIn } = req.cookies;
+    if (loggedIn) {
+      res.send(true);
+    }
+    else {
+      res.send(false);
+    }
+  };
+
   // Add a new user that signs up
   const signup = async (req, res) => {
     const { name, email, password: userPassword } = req.body;
@@ -81,5 +92,7 @@ export default function initUserController(db) {
     }
   };
 
-  return { signup, login, logout };
+  return {
+    signup, login, logout, index,
+  };
 }

@@ -18,6 +18,16 @@ export default function App() {
   const [showSignUpModal, setshowSignUpModal] = useState(false);
   const [showLogInModal, setshowLogInModal] = useState(false);
 
+  // On page load, checks if there is already a cookie/user is logged in
+  useEffect(() => {
+    axios.get('/auth').then((result) => {
+      const isLoggedIn = result.data;
+      if (isLoggedIn) {
+        setLoggedIn(true);
+      }
+    });
+  });
+
   // Initializes on load all the info from the database
   useEffect(() => {
     axios.get('/data').then((result) => {

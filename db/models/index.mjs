@@ -54,6 +54,10 @@ db.Category.belongsTo(db.Section);
 db.Category.hasMany(db.Skill);
 db.Skill.belongsTo(db.Category);
 
+// One user can have many resources
+db.User.hasMany(db.Resource);
+db.Resource.belongsTo(db.User);
+
 // One skill can have many resources
 db.Skill.hasMany(db.Resource);
 db.Resource.belongsTo(db.Skill);

@@ -1,5 +1,5 @@
 import React from 'react';
-import Section from '../Section.jsx';
+import Section from '../Section/index.jsx';
 import Category from '../Category/index.jsx';
 
 export default function Dashboard({
