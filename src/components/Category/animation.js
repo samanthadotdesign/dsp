@@ -13,11 +13,12 @@ const r = 25;
 const CanvasMsg = 'FAQ';
 const CanvasMsg2 = 'MERCH';
 console.log('*****************');
-function setup() {
-  console.log(windowWidth);
-  createCanvas(windowWidth, windowHeight);
-}
-setup();
+
+// function setup() {
+//   console.log(windowWidth);
+//   createCanvas(windowWidth, windowHeight);
+// }
+// setup();
 
 function draw() {
   clear();
