@@ -1,4 +1,3 @@
-import { move } from 'formik';
 import React, { useState, useEffect } from 'react';
 import P5Wrapper from 'react-p5-wrapper';
 import { Badges, Image } from './styles.js';
