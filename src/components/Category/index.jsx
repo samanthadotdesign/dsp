@@ -2,55 +2,11 @@ import React, { useState, useEffect } from 'react';
 import P5Wrapper from 'react-p5-wrapper';
 import { Badges, Image } from './styles.js';
 
-// Badges is an array of loaded images
-const badges = [];
-
 const sketch = (p5, categoriesCompleted) => {
-  const movingBadges = [];
+  // Badges is an array of preloaded images
+  const badges = [];
 
-  // isMouseInside returns boolean
-  const isMouseInside = (x, y) => p5.mouseX > x + 150 && p5.mouseY > y - 75 && p5.mouseY < y + 75;
-
-  // Constructor for bouncing badge class
-  class BouncingBadge {
-    constructor(image, positionX, positionY, xSpeed, ySpeed) {
-      this.image = image;
-      this.xPosition = positionX;
-      this.yPosition = positionY;
-      this.xSpeed = xSpeed;
-      this.ySpeed = ySpeed;
-    }
-
-    move() {
-      // p5.mouseOver()
-      console.log('moving badge');
-      this.xPosition += this.xSpeed;
-      console.log('************ xPosition changing');
-      console.log(this.xPosition);
-
-      if (isMouseInside(this.xPosition, this.yPosition)) {
-        this.xPosition += this.xSpeed;
-        this.yPosition += this.ySpeed;
-      }
-      this.xPosition -= this.xSpeed;
-      this.yPosition -= this.ySpeed;
-
-      if (this.xPosition > p5.windowWidth - 150 || this.xPosition < 75) {
-        this.xSpeed = -this.xSpeed;
-      }
-
-      if (this.yPosition > p5.windowHeight - 75 || this.yPosition < 75) {
-        this.ySpeed = -this.ySpeed;
-      }
-    }
-
-    show() {
-      console.log('showing badge');
-      p5.image(this.image, this.xPosition, this.yPosition, this.xSpeed, this.ySpeed);
-    }
-  }
-
-  // Preload each image and then include it into the badges array.
+  // Preload each image and then include it into the badges array
   p5.preload = () => {
     for (let i = 0; i < categoriesCompleted.length; i += 1) {
       const img = p5.loadImage(categoriesCompleted[i].categoryImg);
@@ -58,33 +14,49 @@ const sketch = (p5, categoriesCompleted) => {
     }
   };
 
+  let xPosition;
+  let yPosition;
+  let xSpeed;
+  let ySpeed;
+
   p5.setup = () => {
     p5.createCanvas(p5.windowWidth, p5.windowHeight);
 
-    const positionX = p5.random(p5.windowWidth);
-    const positionY = p5.random(p5.windowHeight);
-    const xSpeed = p5.random(5);
-    const ySpeed = p5.random(5);
-
     // Create bouncing badges on every page load using draw()
-    for (let i = 0; i < badges.length; i += 1) {
-      const b = new BouncingBadge(badges[i], positionX, positionY, xSpeed, ySpeed);
-      movingBadges.push(b);
+    if (badges.length > 0) {
+      for (let i = 0; i < badges.length; i += 1) {
+        badges[i] = {
+          image: badges[i],
+          xPosition: p5.random(p5.windowWidth),
+          yPosition: p5.random(p5.windowHeight),
+          xSpeed: p5.random(1, 2),
+          ySpeed: p5.random(1, 3),
+        };
+      }
     }
   };
-
-  // Display each image on the screen
-  // for (let i = 0; i < badges.length; i += 1) {
-  //   p5.image(badges[i], i, i);
-  // }
 
   // Redraw on canvas every single second
   p5.draw = () => {
     p5.clear();
-    for (let i = 0; i < badges.length; i += 1) {
-      p5.image(badges[i], i, i);
-      movingBadges[i].move();
-      movingBadges[i].show();
+
+    // Displays each image on the screen
+    if (badges.length > 0) {
+      console.log(badges);
+
+      for (let i = 0; i < badges.length; i += 1) {
+        p5.image(badges[i].image, badges[i].xPosition, badges[i].yPosition, 150, 150);
+
+        if (badges[i].xPosition > p5.windowWidth - 150 || badges[i].xPosition < 0) {
+          console.log('working inside if statement');
+          badges[i].xSpeed *= -1;
+        }
+        if (badges[i].yPosition > p5.windowHeight - 75 || badges[i].yPosition < 75) {
+          badges[i].ySpeed *= -1;
+        }
+        badges[i].xPosition += badges[i].xSpeed;
+        badges[i].yPosition += badges[i].ySpeed;
+      }
     }
   };
 };
