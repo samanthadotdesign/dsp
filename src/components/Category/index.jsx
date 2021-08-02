@@ -8,8 +8,6 @@ const badges = [];
 
 // categoriesCompleted is an array of completed category objects for that user
 export default function Category({ categoriesCompleted }) {
-  const randomSpeed = () => Math.random() * 3;
-
   const sketch = (p5) => {
     const movingBadges = [];
 
@@ -50,7 +48,6 @@ export default function Category({ categoriesCompleted }) {
     }
 
     // Preload each image and then include it into the badges array.
-    // We can't use setState here
     p5.preload = () => {
       for (let i = 0; i < categoriesCompleted.length; i += 1) {
         const img = p5.loadImage(categoriesCompleted[i].categoryImg);
@@ -66,6 +63,7 @@ export default function Category({ categoriesCompleted }) {
       const xSpeed = p5.random(5);
       const ySpeed = p5.random(5);
 
+      // Create bouncing badges on every page load using draw()
       for (let i = 0; i < badges.length; i += 1) {
         const b = new BouncingBadge(badges[i], positionX, positionY, xSpeed, ySpeed);
         movingBadges.push(b);
@@ -80,9 +78,11 @@ export default function Category({ categoriesCompleted }) {
     // Redraw on canvas every single second
     p5.draw = () => {
       p5.clear();
-      for (let i = 0; i < movingBadges.length; i += 1) {
-        movingBadges[i].p5.move();
-        movingBadges[i].p5.show();
+      for (let i = 0; i < badges.length; i += 1) {
+        p5.image(badges[i], i, i);
+
+        // movingBadges[i].p5.move();
+        // movingBadges[i].p5.show();
       }
     };
   };
