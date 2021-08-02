@@ -15,7 +15,6 @@ export default function bindRoutes(app) {
   const SkillController = initSkillController(db);
   const UserController = initUserController(db);
   const ResourceController = initResourceController(db);
-  // const ContributeController = initContributeCountroller();
 
   app.get('/data', DashboardController.index);
   app.get('/category-id/:id', DashboardController.categories);
@@ -28,6 +27,4 @@ export default function bindRoutes(app) {
   app.get('/auth', UserController.index);
 
   app.post('/add-resource', ResourceController.index);
-  // app.get('about', ContributeController.index);
-  // app.get('/contribute', ContributeController.form);
 }
