@@ -1,17 +1,6 @@
 import styled from 'styled-components';
 import { Button } from '../../styles.js';
 
-export const Label = styled.label`
-  font-family: "Atkinson Regular"
-  font-size: 14px;
-`;
-
-export const Error = styled.span`
-  color: #e26e2d;
-  font-family: "Atkinson Regular";
-  font-size: 14px;
-`;
-
 export const Submit = styled(Button)`
   margin-top: 14px;
   text-align: center;

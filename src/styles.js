@@ -151,3 +151,14 @@ export const ButtonLink = styled.button`
     color: #ccc;
   }
 `;
+
+export const Label = styled.label`
+  font-family: "Atkinson Regular"
+  font-size: 14px;
+`;
+
+export const Error = styled.span`
+  color: #e26e2d;
+  font-family: "Atkinson Regular";
+  font-size: 14px;
+`;

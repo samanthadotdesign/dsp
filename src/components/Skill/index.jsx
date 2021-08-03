@@ -1,18 +1,19 @@
 import React from 'react';
+import { Figure, Img, Figcaption } from './styles.js';
 
 export default function Skill({
   skillName, skillImg, skillCompleted,
 }) {
   return (
     <>
-      <figure>
-        <img
+      <Figure>
+        <Img
           src={skillImg}
           alt={skillName}
-          className={skillCompleted ? 'colored' : 'muted'}
+          $skillCompleted={skillCompleted}
         />
-        <figcaption>{skillName}</figcaption>
-      </figure>
+        <Figcaption>{skillName}</Figcaption>
+      </Figure>
     </>
   );
 }
