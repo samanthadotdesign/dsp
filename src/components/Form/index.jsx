@@ -46,7 +46,7 @@ export const SignUpForm = ({ setLoggedIn, toggleSignUpModal, toggleLogInModal })
 
   return (
     <Container>
-      <H3>Sign Up</H3>
+      <H3>Sign up</H3>
       <Formik
         initialValues={{
           name: '',
