@@ -162,3 +162,9 @@ export const Error = styled.span`
   font-family: "Atkinson Regular";
   font-size: 14px;
 `;
+
+export const H1 = styled.h1`
+  font-family: 'Atkinson Bold';
+  font-size: 32px;
+  margin-bottom: 16px;
+`;

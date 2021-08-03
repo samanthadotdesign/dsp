@@ -13,7 +13,15 @@ import { SecondaryButton } from '../../styles.js';
 // skillCompleted is a boolean describing if the skill is completed or not
 // skillCompletedArr is array of skillIds of completed skills
 export default function Resource({
-  skillId, skillName, resourceSkills, setResourceSkills, skillCompletedArr, skillCompleted, setSkillCompleted, categoriesCompleted, setCategoriesCompleted,
+  skillId,
+  skillName,
+  resourceSkills,
+  setResourceSkills,
+  skillCompletedArr,
+  skillCompleted,
+  setSkillCompleted,
+  categoriesCompleted,
+  setCategoriesCompleted,
 }) {
   const [resourceForm, setResourceForm] = useState(false);
   const [addResourceBtn, setAddResourceBtn] = useState(true);
@@ -31,7 +39,9 @@ export default function Resource({
 
         // categoriesCompleted is an array of objects
         if (!categoryIsComplete) {
-          const categoriesArray = categoriesCompleted.filter((category) => category.id != currentCategoryId);
+          const categoriesArray = categoriesCompleted.filter(
+            (category) => category.id !== currentCategoryId,
+          );
           setCategoriesCompleted(categoriesArray);
         }
 
@@ -99,7 +109,3 @@ export default function Resource({
     </ResourceDiv>
   );
 }
-
-// When the button is clicked for that skillId
-// If skillId exists in the database as completed, remove it + update button copy to be "Complete Skill"
-// If skillId does not exist in the database, add it + update button copy to be "Uncomplete Skill"

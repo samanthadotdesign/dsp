@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import P5Wrapper from 'react-p5-wrapper';
-import { Badges, Image } from './styles.js';
+import { Badges } from './styles.js';
 
 const sketch = (p5, categoriesCompleted) => {
   // Badges is an array of preloaded images
@@ -45,13 +45,13 @@ const sketch = (p5, categoriesCompleted) => {
       console.log(badges);
 
       for (let i = 0; i < badges.length; i += 1) {
-        p5.image(badges[i].image, badges[i].xPosition, badges[i].yPosition, 150, 150);
+        p5.image(badges[i].image, badges[i].xPosition, badges[i].yPosition, 100, 100);
 
-        if (badges[i].xPosition > p5.windowWidth - 150 || badges[i].xPosition < 0) {
+        if (badges[i].xPosition > p5.windowWidth - 100 || badges[i].xPosition < 0) {
           console.log('working inside if statement');
           badges[i].xSpeed *= -1;
         }
-        if (badges[i].yPosition > p5.windowHeight - 75 || badges[i].yPosition < 75) {
+        if (badges[i].yPosition > p5.windowHeight - 50 || badges[i].yPosition < 50) {
           badges[i].ySpeed *= -1;
         }
         badges[i].xPosition += badges[i].xSpeed;

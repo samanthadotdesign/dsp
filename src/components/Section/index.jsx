@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Skill from '../Skill/index.jsx';
 import Resource from '../Resource/Resource.jsx';
+import { Grid, SectionDiv } from './styles.js';
+import { H1 } from '../../styles.js';
 
 export default function Section({
   id, sectionName, skills, categoriesCompleted, setCategoriesCompleted,
@@ -40,10 +42,10 @@ export default function Section({
 
   return (
     <>
-      <section id={id}>
-        <h1>{sectionName}</h1>
+      <SectionDiv id={id}>
+        <H1>{sectionName}</H1>
         {/* For every section, create a grid for all the skills with that section id */}
-        <div className="grid">
+        <Grid className="grid">
           {/* Map an array of skill objects into divs */}
           {sectionSkills.map((skill) => (
             <div className="skill">
@@ -67,9 +69,9 @@ export default function Section({
               )}
             </div>
           ))}
-        </div>
+        </Grid>
 
-      </section>
+      </SectionDiv>
     </>
   );
 }

@@ -28,7 +28,7 @@ export const NavBar = styled.header`
   margin: 0;
   padding: 14px 24px;
   max-height: 60px;
-  background-color: inherit;
+  background-color: #fff;
   width: 100vw;
 
   display: flex;
