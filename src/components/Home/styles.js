@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
 export const Section = styled.section`
-  margin-top: 48px;
-  display: flex;
+  position: absolute;
+  top: 60px;
   max-width: 350px;
-  justify-content: center;
   padding: 24px;
+
+  @media screen and (max-width: 550px) {
+    top:120px;
+    align-items: center;
+  }
 `;
 
 export const Em = styled.em`
