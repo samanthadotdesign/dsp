@@ -7,7 +7,6 @@ export const Input = styled.input`
   margin: 8px 0 24px;
   padding: 12px;
   width: 100%;
-  font-family: 'Work Sans', sans-serif;
   font-weight: 600;
   &:focus {
     border-color: #0519ce;
@@ -34,7 +33,6 @@ export const Submit = styled.button`
   font-size: 18px;
   font-weight: 700;
   padding: 12px;
-  text-transform: uppercase;
   @media (max-width: 700px) {
     font-size: 16px;
   }

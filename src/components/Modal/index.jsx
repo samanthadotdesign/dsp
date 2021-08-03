@@ -1,11 +1,21 @@
 import React from 'react';
-import { BG, Modal, Close } from './styles.js';
+import {
+  BG, Modal, CloseDiv, Span,
+} from './styles.js';
+
+const Close = ({ toggleModal }) => (
+  <>
+    <CloseDiv>
+      <Span onClick={toggleModal}>&times;</Span>
+    </CloseDiv>
+  </>
+);
 
 const ModalComponent = ({ toggleModal, children }) => (
   <>
     <BG onClick={toggleModal} />
     <Modal>
-      <Close onClick={toggleModal} />
+      <Close toggleModal={toggleModal} />
       {children}
     </Modal>
   </>

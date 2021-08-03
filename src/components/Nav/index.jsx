@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import logo from '../../../public/assets/logo.svg';
 import {
   Button, NavBar, NavLinks, Logo,
@@ -24,11 +23,7 @@ export default function Nav({
     <>
       <NavBar>
 
-        <Helmet>
-          <script type="text/javascript" async="true" src="./scrolled.js" />
-        </Helmet>
-
-        <Logo src={logo} />
+        <a aria-label="nav" href="/"><Logo src={logo} /></a>
 
         <NavLinks>
           <Button

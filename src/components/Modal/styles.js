@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { AbsoluteCenter } from '../../styles.js';
 
 export const BG = styled.div`
   background: rgba(0, 0, 0, 0.5);
@@ -12,50 +11,50 @@ export const BG = styled.div`
 `;
 
 export const Modal = styled.div`
-  ${AbsoluteCenter}
-  background: #fbfbfb;
-  box-sizing: border-box;
-  padding: 60px;
-  max-width: 800px;
-  width: calc(100vw - 60px);
+  background-color: #fff;
+  margin: 12% auto; 
+  padding: 24px;
+  border: 2px solid #000;
+  width: 350px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   z-index: 3;
 
   @media (max-width: 700px) {
-    padding: 30px;
-    width: calc(100vw - 30px);
+    margin: 100% auto;
+    transform: translateY(-50%);
   }
 `;
 
-export const Close = styled.button`
+export const CloseDiv = styled.div`
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  padding: 8px 14px;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.5s ease;  
+
+  &:hover
+  &:focus {
+    color: #000;
+  }
+`;
+
+export const Span = styled.button`
+  font-size: 28px;
   outline: none;
   background: none;
   border: 0;
   cursor: pointer;
-  height: 30px;
-  padding: 0;
-  position: absolute;
-  right: 60px;
-  top: 60px;
-  width: 30px;
+  color: #ccc;
+  transition: color 0.5s ease;  
 
-  &:before,
-  &:after {
-    background-color: #ccc;
-    content: ' ';
-    height: 18px;
-    left: 15px;
-    position: absolute;
-    top: 0;
-    width: 2px;
-  }
-  &:before {
-    transform: rotate(45deg);
-  }
-  &:after {
-    transform: rotate(-45deg);
-  }
-  @media (max-width: 700px) {
-    right: 30px;
-    top: 30px;
+  &:hover
+  &:focus {
+    color: #000;
   }
 `;

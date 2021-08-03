@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-// import { GlobalStyle } from './styles.js';
+import { GlobalStyle } from './styles.js';
 import Dashboard from './components/Dashboard/index.jsx';
 import Home from './components/Home/index.jsx';
 import Nav from './components/Nav/index.jsx';
@@ -65,6 +65,8 @@ export default function App() {
 
   return (
     <>
+      <GlobalStyle />
+
       <Nav
         loggedIn={loggedIn}
         toggleLogInModal={toggleLogInModal}

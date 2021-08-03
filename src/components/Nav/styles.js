@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Logo = styled.img`
   z-index: 4;
   width: 250px;
-  transition: all 0.4s ease-in-out;  
 `;
 
 export const Button = styled.button`
@@ -25,6 +24,7 @@ export const Button = styled.button`
 `;
 
 export const NavBar = styled.header`
+  margin: 0;
   padding: 14px 24px;
   max-height: 60px;
   background-color: inherit;
@@ -39,12 +39,6 @@ export const NavBar = styled.header`
 
   z-index: 2;
 
-  &.scrolled {
-    ${Logo} & {
-      width: 50%;
-    }
-  }
-
   @media screen and (max-width: 550px) {
     padding-top: 48px;
     height: fit-content;
@@ -53,13 +47,6 @@ export const NavBar = styled.header`
     justify-content: center;
     align-items: center;
     text-align: center;
-
-    &.scrolled {
-      ${Logo} & {
-        width: 100%;
-        margin-bottom: 12px;
-     }
-  }
   }
 `;
 
