@@ -3,8 +3,9 @@ import * as Yup from 'yup';
 import { Formik, Form, useField } from 'formik';
 import axios from 'axios';
 import {
-  Input, Label, Error, Submit, Container, H3, H4,
+  Label, Error, Submit, Container, H3, H4,
 } from './styles.js';
+import { Input } from '../../styles.js';
 
 // Field hook from Formik to create reusable input component
 const InputComponent = ({ label, ...props }) => {

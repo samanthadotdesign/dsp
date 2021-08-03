@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import logo from '../../../public/assets/logo.svg';
+import { GlobalStyle } from '../../styles.js';
 import {
   Button, NavBar, NavLinks, Logo,
 } from './styles.js';

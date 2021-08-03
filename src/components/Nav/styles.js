@@ -6,6 +6,7 @@ export const Logo = styled.img`
 `;
 
 export const Button = styled.button`
+  font-family: 'Atkinson Regular';
   border: none;
   outline: none;
   padding: 0;

@@ -1,14 +1,35 @@
 import styled, { createGlobalStyle, css } from 'styled-components';
+import AtkinsonBold from './fonts/Atkinson-Hyperlegible-Bold-102a.woff2';
+import AtkinsonRegular from './fonts/Atkinson-Hyperlegible-Regular-102a.woff2';
 
 const dark = '#000';
 const light = '#fff';
 const gray = '#ccc';
+
+const fonts = css`
+  @font-face {
+    font-family: 'Atkinson Regular';
+    src: url(${AtkinsonRegular}) format('woff2');
+    font-style: normal;
+  } 
+
+  @font-face {
+    font-family: 'Atkinson Bold';
+    src: url(${AtkinsonBold}) format('woff2');
+    font-style: bold;
+  } 
+
+  html {
+    font-family: 'Atkinson Regular';
+  }
+`;
 
 export const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     margin: 0;
   }
+  ${fonts}
 `;
 
 export const AbsoluteCenter = css`
@@ -22,8 +43,8 @@ export const Button = styled.button`
   font-size: 16px;
   padding: 8px;
   width: 100%;
-  background-color: ${dark};
   color: ${light}
+  background-color: ${dark};
   transition: all 0.5s ease-in;
   outline: none;
   border: none;
@@ -35,6 +56,7 @@ export const Button = styled.button`
   }
 
   &:hover {
+    color: ${dark}
     background-color: ${gray}
   }
 `;
@@ -56,5 +78,42 @@ export const SecondaryButton = styled(Button)`
 
   @media screen and (max-width: 550px) {
     padding: 8px;
+  }
+`;
+
+export const Input = styled.input`
+  border: 2px solid #000;
+  outline: #000;
+  background: #fff;
+  color: #000;
+  padding: 8px;
+  margin-bottom: 14px;
+  width: 100%;
+
+  &:focus {
+    border-color: #000;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 16px;
+  }
+`;
+
+export const Textarea = styled.textarea`
+  border: 2px solid #000;
+  outline: #000;
+  background: #fff;
+  color: #000;
+  padding: 8px;
+  margin-bottom: 14px;
+  width: 100%;
+  resize: none;
+
+  &:focus {
+    border-color: #000;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 16px;
   }
 `;
