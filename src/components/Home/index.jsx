@@ -3,6 +3,7 @@ import { GlobalStyle, P } from '../../styles.js';
 import Modal from '../Modal/index.jsx';
 import { SignUpForm, LogInForm } from '../Form/index.jsx';
 import { Section, Em } from './styles.js';
+import { Animation } from './Animation.jsx';
 
 export default function Home({
   showLogInModal,
@@ -14,6 +15,7 @@ export default function Home({
   return (
     <>
       <GlobalStyle />
+      <Animation />
 
       {showSignUpModal && (
       <Modal toggleModal={toggleSignUpModal}>
