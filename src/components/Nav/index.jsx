@@ -37,7 +37,7 @@ export default function Nav({
           type="button"
           onClick={toggleLogInModal}
         >
-          Log In
+          Log in
         </Button>
         )}
 
