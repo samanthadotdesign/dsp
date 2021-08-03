@@ -1,41 +1,84 @@
 import styled from 'styled-components';
+import { Input, SecondaryButton } from '../../styles.js';
 
-export const Submit = styled.button`
-  background: none;
-  border: 2px solid #0519ce;
-  color: #0519ce;
-  cursor: pointer;
-  float: right;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 12px;
-  text-transform: uppercase;
-  @media (max-width: 700px) {
+export const H2 = styled.h2`
+  font-family: 'Atkinson Bold';
+  font-size: 16px;
+  margin-bottom: 8px;
+
+  @media screen and (max-width: 550px) {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+`;
+
+export const ResourceDiv = styled.div`
+  padding: 14px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #000;
+  border: 1.5px solid #000;
+  width: 250px;
+  height: fit-content;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-20%);
+  z-index: 5;
+
+  @media screen and (max-width: 550px) {
+    width: 90vw;
+    position: fixed;
+    top: 30vh;
+    transform: translateX(-50%);
+    padding: 8px;
     font-size: 16px;
   }
 `;
 
-export const Label = styled.label`
-  font-weight: 600;
-`;
-
-export const Input = styled.input`
-  border: 2px solid #000;
-  box-sizing: border-box;
-  font-size: 18px;
-  margin: 8px 0 24px;
-  padding: 12px;
+export const UL = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin-bottom: 12px;
   width: 100%;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 600;
-  &:focus {
-    border-color: #0519ce;
-  }
-  @media (max-width: 700px) {
-    font-size: 16px;
+`;
+
+export const LI = styled.li`
+  text-underline: none;
+
+  @media screen and (max-width: 550px) {
+    margin: 8px 0;
   }
 `;
 
-export const Error = styled.span`
-  color: #e26e2d;
+export const Link = styled.a`
+  text-decoration: none;
+
+  &:visited {
+    color: #6292EF;
+  }
+
+  &:hover {
+    color: #4B4B45;
+  }
+`;
+
+export const Submit = styled(SecondaryButton)`
+  max-width: 100px;
+`;
+
+export const ButtonFieldset = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+`;
+
+export const ResourceInput = styled(Input)`
+  border: 1.5px solid #000;
+
+  &:focus {
+    border-color: #5552FF;
+  }
 `;

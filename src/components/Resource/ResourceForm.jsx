@@ -5,8 +5,9 @@ import {
 import * as Yup from 'yup';
 import axios from 'axios';
 import {
-  Input, Label, Error, Submit,
+  ButtonFieldset, ResourceInput, Submit, H2,
 } from './styles.js';
+import { Label, Error } from '../../styles.js';
 
 const InputComponent = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -16,17 +17,17 @@ const InputComponent = ({ label, ...props }) => {
       {label}
       :
       {meta.touched && meta.error && <Error>{meta.error}</Error>}
-      <Input {...field} {...props} />
+      <ResourceInput {...field} {...props} />
     </Label>
   );
 };
 
 export default function ResourceForm({
-  resourceSkills, setResourceSkills, skillId, setResourceForm,
+  resourceSkills, setResourceSkills, skillId, setResourceForm, setAddResourceBtn,
 }) {
   const schema = Yup.object().shape({
-    title: Yup.string().required('Required field'),
-    link: Yup.string().required('Required field'),
+    title: Yup.string().required(' Give your resource a title :)'),
+    link: Yup.string().required(' Add a link to remember'),
   });
 
   console.log('******* DEFAULT RESOURCE SKILLS');
@@ -51,11 +52,13 @@ export default function ResourceForm({
       }
       setResourceSkills({ ...resourceSkills });
       setResourceForm(false);
+      setAddResourceBtn(true);
     });
   };
 
   const handleCancelForm = () => {
     setResourceForm(false);
+    setAddResourceBtn(true);
   };
 
   return (
@@ -70,10 +73,13 @@ export default function ResourceForm({
       >
         {() => (
           <Form>
+            <H2>Add Resources To Your List</H2>
             <InputComponent name="title" type="text" label="Title" autoComplete="off" />
             <InputComponent name="link" type="text" label="Link" autoComplete="off" />
-            <Submit type="submit">Submit</Submit>
-            <button type="button" onClick={handleCancelForm}>Cancel</button>
+            <ButtonFieldset>
+              <Submit type="submit">Submit</Submit>
+              <Submit type="button" onClick={handleCancelForm}>Cancel</Submit>
+            </ButtonFieldset>
           </Form>
         )}
       </Formik>

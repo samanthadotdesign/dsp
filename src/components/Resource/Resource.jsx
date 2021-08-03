@@ -1,6 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import ResourceForm from './ResourceForm.jsx';
+import {
+  H2, ResourceDiv, UL, LI, Link,
+} from './styles.js';
+import { SecondaryButton } from '../../styles.js';
 
 // Add resource emoji
 
@@ -12,6 +16,7 @@ export default function Resource({
   skillId, skillName, resourceSkills, setResourceSkills, skillCompletedArr, skillCompleted, setSkillCompleted, categoriesCompleted, setCategoriesCompleted,
 }) {
   const [resourceForm, setResourceForm] = useState(false);
+  const [addResourceBtn, setAddResourceBtn] = useState(true);
   const resourcesForSkillId = resourceSkills[skillId];
 
   const handleClick = () => {
@@ -47,23 +52,24 @@ export default function Resource({
   // Add the new inline fields for user to add the resource
   const handleShowForm = () => {
     setResourceForm(true);
+    setAddResourceBtn(false);
   };
 
   // If skill is complete, the copy is Uncomplete Skill
   return (
-    <div
+    <ResourceDiv
       className="resource"
     >
-      <h2>{skillName}</h2>
-      <ul>
+      <H2>{skillName}</H2>
+      <UL>
         {resourcesForSkillId && resourcesForSkillId.map((resource) => (
-          <li>
-            <a href={resource.link} target="_blank">
+          <LI>
+            <Link href={resource.link} target="_blank">
               {resource.name}
-            </a>
-          </li>
+            </Link>
+          </LI>
         ))}
-      </ul>
+      </UL>
 
       {resourceForm
       && (
@@ -72,22 +78,25 @@ export default function Resource({
         setResourceSkills={setResourceSkills}
         skillId={skillId}
         setResourceForm={setResourceForm}
+        setAddResourceBtn={setAddResourceBtn}
       />
       )}
 
-      <button
+      {addResourceBtn && (
+      <SecondaryButton
         type="button"
         onClick={handleShowForm}
       >
         Add Resource
-      </button>
+      </SecondaryButton>
+      )}
 
-      <button
+      <SecondaryButton
         onClick={handleClick}
       >
         {skillCompleted ? 'Uncomplete Skill' : 'Complete Skill'}
-      </button>
-    </div>
+      </SecondaryButton>
+    </ResourceDiv>
   );
 }
 
