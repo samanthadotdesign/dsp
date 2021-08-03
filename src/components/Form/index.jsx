@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { Formik, Form, useField } from 'formik';
 import axios from 'axios';
 import {
-  Submit, Container, H3,
+  Submit, Container, H3, ImgDiv,
 } from './styles.js';
 import {
   Label, Error, Input, P, ButtonLink,
@@ -27,8 +27,10 @@ const InputComponent = ({ label, ...props }) => {
 // Error handling
 export const ErrorForm = ({ toggleSignUpModal, toggleLogInModal }) => (
   <Container>
-    <H3>Sorry! </H3>
-    <P>Please try again.</P>
+    <ImgDiv>
+      <img alt="Error" src={ErrorCat} />
+    </ImgDiv>
+    <H3>Sorry, we didn't catch that.</H3>
     <Submit onClick={toggleSignUpModal}>Create new account</Submit>
     <ButtonLink onClick={toggleLogInModal}>Try logging in again</ButtonLink>
   </Container>
@@ -100,12 +102,12 @@ export const LogInForm = ({
   // Send to database
   const handleLogInSubmit = (values) => {
     axios.post('/login', values).then((result) => {
-      if (result.data === 'OK') {
+      if (result.status === 200) {
         toggleLogInModal();
         setLoggedIn(true);
       }
       // Handling the errors for not correct login
-      else {
+      if (result.status === 401) {
         console.log(result.data);
         console.log(result);
         toggleErrorModal();

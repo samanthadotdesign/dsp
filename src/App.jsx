@@ -53,15 +53,16 @@ export default function App() {
   const toggleSignUpModal = () => {
     // Log in modal should be closed
     setShowLogInModal(false);
-
     // Show sign up modal if sign up modal is not open
     // If open, close sign up modal
     setShowSignUpModal(!showSignUpModal);
+    setShowErrorModal(false);
   };
 
   const toggleLogInModal = () => {
     setShowSignUpModal(false);
     setShowLogInModal(!showLogInModal);
+    setShowErrorModal(false);
   };
 
   const toggleErrorModal = () => {
@@ -69,6 +70,7 @@ export default function App() {
     setShowSignUpModal(false);
     setShowErrorModal(true);
   };
+
   return (
     <>
       <GlobalStyle />

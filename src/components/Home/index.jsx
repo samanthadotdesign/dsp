@@ -42,13 +42,12 @@ export default function Home({
       )}
 
       {showErrorModal && (
-        <Modal toggleModal={toggleErrorModal}>
-          <ErrorForm
-            toggleErrorModal={toggleErrorModal}
-            toggleLogInModal={toggleLogInModal}
-            toggleSignUpModal={toggleSignUpModal}
-          />
-        </Modal>
+      <Modal toggleModal={toggleErrorModal}>
+        <ErrorForm
+          toggleLogInModal={toggleLogInModal}
+          toggleSignUpModal={toggleSignUpModal}
+        />
+      </Modal>
       )}
 
       <Section>

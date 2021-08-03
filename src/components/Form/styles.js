@@ -23,4 +23,12 @@ export const H3 = styled.h3`
   margin-bottom: 32px;
   color: #000;
   font-family: "Atkinson Bold";
+  text-align: center;
+`;
+
+export const ImgDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
 `;
