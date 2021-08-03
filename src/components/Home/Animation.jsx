@@ -30,7 +30,7 @@ const sketch = (p5) => {
           xPosition: p5.random(p5.windowWidth),
           yPosition: p5.random(p5.windowHeight),
           xSpeed: p5.random(1, 2),
-          ySpeed: p5.random(1, 3),
+          ySpeed: p5.random(3, 4),
         };
       }
     }

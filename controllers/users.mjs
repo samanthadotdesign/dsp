@@ -18,8 +18,6 @@ export default function initUserController(db) {
 
     try {
       const hashedPassword = await bcrypt.hash(userPassword, 10);
-
-      // create new instance for the user
       const newUser = await db.User.create({
         name,
         email,
@@ -50,16 +48,12 @@ export default function initUserController(db) {
   const login = async (req, res) => {
     const { email, password: inputPassword } = req.body;
     try {
-      // find the instance of the user
       const user = await db.User.findOne({
         where: { email },
       });
 
-      // If user exists
       if (user) {
         const savedPassword = user.password;
-
-        // Compare the saved password with the current input
         const correctPassword = await bcrypt.compare(inputPassword, savedPassword);
 
         if (!correctPassword) {
@@ -71,18 +65,18 @@ export default function initUserController(db) {
         res.sendStatus(200);
       } else {
         // If user doesn't exist
-        console.log('We couldn\'t find your email. If you can\'t remember your account, we can send you a reminder.');
+        console.log('error logging in', error);
         res.sendStatus(401);
       }
     } catch (error) {
-      console.log('error logging in', error);
+      console.log('catching error in log in', error);
+      res.sendStatus(401);
     }
   };
 
   // User logs out
   const logout = async (req, res) => {
     try {
-      // delete cookies
       res.clearCookie('loggedIn');
       res.clearCookie('userId');
       res.sendStatus(200);

@@ -17,6 +17,7 @@ export default function App() {
 
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showLogInModal, setShowLogInModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   // On page load, checks if there is already a cookie/user is logged in
   useEffect(() => {
@@ -63,6 +64,11 @@ export default function App() {
     setShowLogInModal(!showLogInModal);
   };
 
+  const toggleErrorModal = () => {
+    setShowLogInModal(false);
+    setShowSignUpModal(false);
+    setShowErrorModal(true);
+  };
   return (
     <>
       <GlobalStyle />
@@ -90,6 +96,8 @@ export default function App() {
         toggleSignUpModal={toggleSignUpModal}
         showSignUpModal={showSignUpModal}
         setLoggedIn={setLoggedIn}
+        showErrorModal={showErrorModal}
+        toggleErrorModal={toggleErrorModal}
       />
       )}
     </>

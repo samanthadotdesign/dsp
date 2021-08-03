@@ -1,7 +1,7 @@
 import React from 'react';
 import { GlobalStyle, P } from '../../styles.js';
 import Modal from '../Modal/index.jsx';
-import { SignUpForm, LogInForm } from '../Form/index.jsx';
+import { SignUpForm, LogInForm, ErrorForm } from '../Form/index.jsx';
 import { Section, Em } from './styles.js';
 import { Animation } from './Animation.jsx';
 
@@ -11,6 +11,8 @@ export default function Home({
   toggleSignUpModal,
   showSignUpModal,
   setLoggedIn,
+  showErrorModal,
+  toggleErrorModal,
 }) {
   return (
     <>
@@ -18,13 +20,14 @@ export default function Home({
       <Animation />
 
       {showSignUpModal && (
-      <Modal toggleModal={toggleSignUpModal}>
-        <SignUpForm
-          setLoggedIn={setLoggedIn}
-          toggleSignUpModal={toggleSignUpModal}
-          toggleLogInModal={toggleLogInModal}
-        />
-      </Modal>
+        <Modal toggleModal={toggleSignUpModal}>
+          <SignUpForm
+            setLoggedIn={setLoggedIn}
+            toggleSignUpModal={toggleSignUpModal}
+            toggleLogInModal={toggleLogInModal}
+            toggleErrorModal={toggleErrorModal}
+          />
+        </Modal>
       )}
 
       {showLogInModal && (
@@ -33,8 +36,19 @@ export default function Home({
           setLoggedIn={setLoggedIn}
           toggleLogInModal={toggleLogInModal}
           toggleSignUpModal={toggleSignUpModal}
+          toggleErrorModal={toggleErrorModal}
         />
       </Modal>
+      )}
+
+      {showErrorModal && (
+        <Modal toggleModal={toggleErrorModal}>
+          <ErrorForm
+            toggleErrorModal={toggleErrorModal}
+            toggleLogInModal={toggleLogInModal}
+            toggleSignUpModal={toggleSignUpModal}
+          />
+        </Modal>
       )}
 
       <Section>

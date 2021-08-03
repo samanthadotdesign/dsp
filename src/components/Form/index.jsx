@@ -8,6 +8,7 @@ import {
 import {
   Label, Error, Input, P, ButtonLink,
 } from '../../styles.js';
+import ErrorCat from '../../../public/assets/error.svg';
 
 // Field hook from Formik to create reusable input component
 const InputComponent = ({ label, ...props }) => {
@@ -23,8 +24,20 @@ const InputComponent = ({ label, ...props }) => {
   );
 };
 
+// Error handling
+export const ErrorForm = ({ toggleSignUpModal, toggleLogInModal }) => (
+  <Container>
+    <H3>Sorry! </H3>
+    <P>Please try again.</P>
+    <Submit onClick={toggleSignUpModal}>Create new account</Submit>
+    <ButtonLink onClick={toggleLogInModal}>Try logging in again</ButtonLink>
+  </Container>
+);
+
 // Sign up modal
-export const SignUpForm = ({ setLoggedIn, toggleSignUpModal, toggleLogInModal }) => {
+export const SignUpForm = ({
+  setLoggedIn, toggleSignUpModal, toggleLogInModal, toggleErrorModal,
+}) => {
   const schema = Yup.object().shape({
     name: Yup.string().required(' Maybe a fantasy title?'),
     email: Yup.string().email(' Oops! Is that valid?').required(' We need this :('),
@@ -41,6 +54,9 @@ export const SignUpForm = ({ setLoggedIn, toggleSignUpModal, toggleLogInModal })
         setLoggedIn(true);
       }
       // Handle incorrect signup
+      else {
+        toggleErrorModal();
+      }
     });
   };
 
@@ -73,7 +89,9 @@ export const SignUpForm = ({ setLoggedIn, toggleSignUpModal, toggleLogInModal })
   );
 };
 
-export const LogInForm = ({ setLoggedIn, toggleLogInModal, toggleSignUpModal }) => {
+export const LogInForm = ({
+  setLoggedIn, toggleLogInModal, toggleSignUpModal, toggleErrorModal,
+}) => {
   const schema = Yup.object().shape({
     email: Yup.string().email(' Oops! Is that valid?').required(' We need this :('),
     password: Yup.string().required(' We need this :('),
@@ -87,6 +105,11 @@ export const LogInForm = ({ setLoggedIn, toggleLogInModal, toggleSignUpModal }) 
         setLoggedIn(true);
       }
       // Handling the errors for not correct login
+      else {
+        console.log(result.data);
+        console.log(result);
+        toggleErrorModal();
+      }
     });
   };
 

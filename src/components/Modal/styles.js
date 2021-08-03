@@ -8,6 +8,7 @@ export const BG = styled.div`
   top: 0;
   width: 100vw;
   z-index: 2;
+  overflow: none;
 `;
 
 export const Modal = styled.div`
