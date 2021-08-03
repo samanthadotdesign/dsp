@@ -15,8 +15,8 @@ export default function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [showSignUpModal, setshowSignUpModal] = useState(false);
-  const [showLogInModal, setshowLogInModal] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
+  const [showLogInModal, setShowLogInModal] = useState(false);
 
   // On page load, checks if there is already a cookie/user is logged in
   useEffect(() => {
@@ -51,16 +51,16 @@ export default function App() {
 
   const toggleSignUpModal = () => {
     // Log in modal should be closed
-    setshowLogInModal(false);
+    setShowLogInModal(false);
 
     // Show sign up modal if sign up modal is not open
     // If open, close sign up modal
-    setshowSignUpModal(!showSignUpModal);
+    setShowSignUpModal(!showSignUpModal);
   };
 
   const toggleLogInModal = () => {
-    setshowSignUpModal(false);
-    setshowLogInModal(!showLogInModal);
+    setShowSignUpModal(false);
+    setShowLogInModal(!showLogInModal);
   };
 
   return (
