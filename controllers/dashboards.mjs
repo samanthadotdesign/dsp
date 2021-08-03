@@ -11,28 +11,35 @@ const getDashboardData = async (db, userId) => {
     const skills = await db.Skill.findAll();
     const resources = await db.Resource.findAll();
 
+    let skillsCompleted;
+    let categoriesCompleted;
     // user_skills
     // db.Skill --> query the 'skills table'
     // Include: find the skills with the userId
-    const skillsCompleted = await db.UserSkill.findAll({
-      where: {
-        id: userId,
-        completed: true,
-      },
-    });
-
-    // user_categories
-    // db.Category -> query the categories table
-    // Include: find the categories with the userId
-    const categoriesCompleted = await db.Category.findAll({
-      include: {
-        // From the users table, find the PK
-        model: db.User,
+    if (userId) {
+      skillsCompleted = await db.UserSkill.findAll({
         where: {
           id: userId,
+          completed: true,
         },
-      },
-    });
+      });
+
+      // user_categories
+      // db.Category -> query the categories table
+      // Include: find the categories with the userId
+      categoriesCompleted = await db.Category.findAll({
+        include: {
+        // From the users table, find the PK
+          model: db.User,
+          where: {
+            id: userId,
+          },
+        },
+      });
+    } else {
+      skillsCompleted = {};
+      categoriesCompleted = {};
+    }
 
     result = {
       sections,
@@ -53,7 +60,13 @@ export default function initDashboardController(db) {
   // Use async/await here to getDashboardData
   const index = async (req, res) => {
     const { userId } = req.cookies;
-    const dashboardData = await getDashboardData(db, userId);
+    let dashboardData;
+    if (userId) {
+      dashboardData = await getDashboardData(db, userId);
+    }
+    else {
+      dashboardData = await getDashboardData(db);
+    }
     // Object that holds all the dashboard data
     res.send(dashboardData);
   };
