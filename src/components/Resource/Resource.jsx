@@ -65,10 +65,12 @@ export default function Resource({
         setSkillCompleted(skillsArray);
 
         // categoriesCompleted is an array of objects
-        if (!categoryIsComplete) {
+        // We only modify the categories completed list if the categoriesCompleted array isn't empty
+        if (!categoryIsComplete && categoriesCompleted.length > 0) {
           const categoriesArray = categoriesCompleted.filter(
             (category) => category.id !== currentCategoryId,
           );
+          console.log('running inside when categories length is greater than 0');
           setCategoriesCompleted(categoriesArray);
         }
 
@@ -80,7 +82,14 @@ export default function Resource({
         /* categoryIsComplete comes from the backend response
         If categoryIsComplete, add new categoryId to the categoriesCompleted */
         if (categoryIsComplete) {
-          setCategoriesCompleted([...categoriesCompleted, currentCategory]);
+          // If there are existing completed categories, spread the array and add to it
+          if (categoriesCompleted.length > 0) {
+            setCategoriesCompleted([...categoriesCompleted, currentCategory]);
+            console.log('adding to categories array');
+          } else {
+            setCategoriesCompleted([currentCategory]);
+            console.log('replacing categories array');
+          }
         }
       }
     });
