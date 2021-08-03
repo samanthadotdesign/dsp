@@ -15,13 +15,21 @@ export default function Home({
       <GlobalStyle />
       {showSignUpModal && (
       <Modal toggleModal={toggleSignUpModal}>
-        <SignUpForm setLoggedIn={setLoggedIn} toggleSignUpModal={toggleSignUpModal} />
+        <SignUpForm
+          setLoggedIn={setLoggedIn}
+          toggleSignUpModal={toggleSignUpModal}
+          toggleLogInModal={toggleLogInModal}
+        />
       </Modal>
       )}
 
       {showLogInModal && (
       <Modal toggleModal={toggleLogInModal}>
-        <LogInForm setLoggedIn={setLoggedIn} toggleLogInModal={toggleLogInModal} />
+        <LogInForm
+          setLoggedIn={setLoggedIn}
+          toggleLogInModal={toggleLogInModal}
+          toggleSignUpModal={toggleSignUpModal}
+        />
       </Modal>
       )}
     </>

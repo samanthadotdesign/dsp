@@ -3,9 +3,9 @@ import * as Yup from 'yup';
 import { Formik, Form, useField } from 'formik';
 import axios from 'axios';
 import {
-  Label, Error, Submit, Container, H3, H4,
+  Label, Error, Submit, Container, H3,
 } from './styles.js';
-import { Input } from '../../styles.js';
+import { Input, P, ButtonLink } from '../../styles.js';
 
 // Field hook from Formik to create reusable input component
 const InputComponent = ({ label, ...props }) => {
@@ -22,11 +22,11 @@ const InputComponent = ({ label, ...props }) => {
 };
 
 // Sign up modal
-export const SignUpForm = ({ setLoggedIn, toggleSignUpModal }) => {
+export const SignUpForm = ({ setLoggedIn, toggleSignUpModal, toggleLogInModal }) => {
   const schema = Yup.object().shape({
-    name: Yup.string().required('Required field'),
-    email: Yup.string().email('Must be a valid email address').required('Required field'),
-    password: Yup.string().required('Required field'),
+    name: Yup.string().required(' Maybe a fantasy title?'),
+    email: Yup.string().email(' Oops! Is that valid?').required(' We need this :('),
+    password: Yup.string().required(' We need this :('),
   });
 
   // Send to database
@@ -59,18 +59,22 @@ export const SignUpForm = ({ setLoggedIn, toggleSignUpModal }) => {
             <InputComponent name="name" type="text" label="Name" autoComplete="off" />
             <InputComponent name="email" type="email" label="Email" autoComplete="off" />
             <InputComponent name="password" type="password" label="Password" autoComplete="off" />
-            <Submit type="submit">Submit</Submit>
+            <Submit type="submit">Sign up</Submit>
           </Form>
         )}
       </Formik>
+      <P>Already have an account? </P>
+      <ButtonLink onClick={toggleLogInModal}>
+        Log in instead
+      </ButtonLink>
     </Container>
   );
 };
 
-export const LogInForm = ({ setLoggedIn, toggleLogInModal }) => {
+export const LogInForm = ({ setLoggedIn, toggleLogInModal, toggleSignUpModal }) => {
   const schema = Yup.object().shape({
-    email: Yup.string().email('Must be a valid email address').required('Required field'),
-    password: Yup.string().required('Required field'),
+    email: Yup.string().email(' Oops! Is that valid?').required(' We need this :('),
+    password: Yup.string().required(' We need this :('),
   });
 
   // Send to database
@@ -86,7 +90,7 @@ export const LogInForm = ({ setLoggedIn, toggleLogInModal }) => {
 
   return (
     <Container>
-      <H3>Log In</H3>
+      <H3>Log in</H3>
       <Formik
         initialValues={{
           email: '',
@@ -99,10 +103,14 @@ export const LogInForm = ({ setLoggedIn, toggleLogInModal }) => {
           <Form>
             <InputComponent name="email" type="email" label="Email" autoComplete="off" />
             <InputComponent name="password" type="password" label="Password" autoComplete="off" />
-            <Submit type="submit">Submit</Submit>
+            <Submit type="submit">Log in</Submit>
           </Form>
         )}
       </Formik>
+      <P>No account? </P>
+      <ButtonLink onClick={toggleSignUpModal}>
+        Create one instead
+      </ButtonLink>
     </Container>
   );
 };

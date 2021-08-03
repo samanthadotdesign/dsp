@@ -40,28 +40,32 @@ export const AbsoluteCenter = css`
 `;
 
 export const Button = styled.button`
+  font-family: 'Atkinson Regular';
   font-size: 16px;
   padding: 8px;
   width: 100%;
-  color: ${light}
+  color: ${light};
   background-color: ${dark};
   transition: all 0.5s ease-in;
   outline: none;
   border: none;
   margin-bottom: 16px;
   text-align: left;
+  cursor: pointer;
 
   @media screen and (max-width: 550px) {
     padding: 12px;
   }
 
   &:hover {
-    color: ${dark}
+    color: ${dark};
     background-color: ${gray}
   }
 `;
 
-export const SecondaryButton = styled(Button)`
+export const SecondaryButton = styled.button`
+  font-family: 'Atkinson Regular';
+  font-size: 16px;
   width: 100%;
   padding: 4px;
   font-size: 14px;
@@ -73,7 +77,7 @@ export const SecondaryButton = styled(Button)`
   margin-top: 14px;
 
   &:hover {
-    background-color: ${gray}
+    background-color: ${gray};
   }
 
   @media screen and (max-width: 550px) {
@@ -82,6 +86,8 @@ export const SecondaryButton = styled(Button)`
 `;
 
 export const Input = styled.input`
+  font-family: 'Atkinson Regular';
+  font-size: 16px;
   border: 2px solid #000;
   outline: #000;
   background: #fff;
@@ -95,11 +101,14 @@ export const Input = styled.input`
   }
 
   @media (max-width: 700px) {
-    font-size: 16px;
+    padding: 12px;
+    margin-bottom: 16px;
   }
 `;
 
 export const Textarea = styled.textarea`
+  font-family: 'Atkinson Regular';
+  font-size: 16px;
   border: 2px solid #000;
   outline: #000;
   background: #fff;
@@ -114,6 +123,31 @@ export const Textarea = styled.textarea`
   }
 
   @media (max-width: 700px) {
-    font-size: 16px;
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+`;
+
+export const P = styled.p`
+  font-family: 'Atkinson Regular';
+  font-size: 16px;
+  display: inline;
+`;
+
+export const ButtonLink = styled.button`
+  display: inline;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  cursor: pointer;
+  transition: color 0.5s ease;
+  color: #000;
+  font-family: 'Atkinson Regular';
+  font-size: 16px;
+
+  &:hover {
+    color: #ccc;
   }
 `;

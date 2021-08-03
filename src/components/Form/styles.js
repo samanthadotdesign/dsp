@@ -3,11 +3,13 @@ import { Button } from '../../styles.js';
 
 export const Label = styled.label`
   font-family: "Atkinson Regular"
+  font-size: 14px;
 `;
 
 export const Error = styled.span`
   color: #e26e2d;
   font-family: "Atkinson Regular";
+  font-size: 14px;
 `;
 
 export const Submit = styled(Button)`
@@ -21,6 +23,10 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 85%;
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+  }
 `;
 
 export const H3 = styled.h3`
