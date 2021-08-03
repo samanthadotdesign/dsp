@@ -77,8 +77,8 @@ export default function ResourceForm({
             <InputComponent name="title" type="text" label="Title" autoComplete="off" />
             <InputComponent name="link" type="text" label="Link" autoComplete="off" />
             <ButtonFieldset>
-              <Submit type="submit">Submit</Submit>
               <Submit type="button" onClick={handleCancelForm}>Cancel</Submit>
+              <Submit type="submit">Submit</Submit>
             </ButtonFieldset>
           </Form>
         )}

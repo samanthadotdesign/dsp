@@ -42,13 +42,10 @@ const sketch = (p5, categoriesCompleted) => {
 
     // Displays each image on the screen
     if (badges.length > 0) {
-      console.log(badges);
-
       for (let i = 0; i < badges.length; i += 1) {
         p5.image(badges[i].image, badges[i].xPosition, badges[i].yPosition, 100, 100);
 
         if (badges[i].xPosition > p5.windowWidth - 100 || badges[i].xPosition < 0) {
-          console.log('working inside if statement');
           badges[i].xSpeed *= -1;
         }
         if (badges[i].yPosition > p5.windowHeight - 50 || badges[i].yPosition < 50) {

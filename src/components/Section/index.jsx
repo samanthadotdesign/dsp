@@ -11,7 +11,6 @@ export default function Section({
   // sectionSkills = [ { skillName: ..., skillImg: ..., completed: True }, {} ]
   const [sectionSkills, setSectionSkills] = useState([]);
   const [resourceSkills, setResourceSkills] = useState([]);
-  const [resourceVisible, setResourceVisible] = useState(true);
   const [skillCompletedArr, setSkillCompleted] = useState([]);
 
   // On load, print all the skills for each section
@@ -54,7 +53,6 @@ export default function Section({
                 skillImg={skill.skillImg}
                 skillCompleted={skillCompletedArr.includes(skill.id)}
               />
-              {resourceVisible && (
               <Resource
                 skillId={skill.id}
                 skillName={skill.skillName}
@@ -66,7 +64,6 @@ export default function Section({
                 setSkillCompleted={setSkillCompleted}
                 setCategoriesCompleted={setCategoriesCompleted}
               />
-              )}
             </div>
           ))}
         </Grid>

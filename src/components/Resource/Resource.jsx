@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ResourceForm from './ResourceForm.jsx';
 import {
   H2, ResourceDiv, UL, LI, Link,
@@ -9,6 +9,27 @@ import { SecondaryButton } from '../../styles.js';
 // Add resource emoji
 
 // resourceSkill is only for this particular skillId
+// Help to create modals for resource divs when in mobile view
+const getWindowDimensions = () => {
+  const { innerWidth: width, innerHeight: height } = window;
+  return { width, height };
+};
+
+const useWindowDimensions = () => {
+  const initialDimensions = getWindowDimensions();
+  const [windowDimensions, setWindowDimensions] = useState(initialDimensions);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowDimensions(getWindowDimensions());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowDimensions;
+};
 
 // skillCompleted is a boolean describing if the skill is completed or not
 // skillCompletedArr is array of skillIds of completed skills
@@ -26,6 +47,9 @@ export default function Resource({
   const [resourceForm, setResourceForm] = useState(false);
   const [addResourceBtn, setAddResourceBtn] = useState(true);
   const resourcesForSkillId = resourceSkills[skillId];
+
+  const { height, width } = useWindowDimensions();
+  const isWide = (width > 550);
 
   const handleClick = () => {
     axios.put('/skill', { skillId, skillCompleted }).then((result) => {
@@ -67,6 +91,7 @@ export default function Resource({
 
   // If skill is complete, the copy is Uncomplete Skill
   return (
+
     <ResourceDiv
       className="resource"
     >
@@ -93,12 +118,12 @@ export default function Resource({
       )}
 
       {addResourceBtn && (
-      <SecondaryButton
-        type="button"
-        onClick={handleShowForm}
-      >
-        Add Resource
-      </SecondaryButton>
+        <SecondaryButton
+          type="button"
+          onClick={handleShowForm}
+        >
+          Add Resource
+        </SecondaryButton>
       )}
 
       <SecondaryButton
@@ -107,5 +132,6 @@ export default function Resource({
         {skillCompleted ? 'Uncomplete Skill' : 'Complete Skill'}
       </SecondaryButton>
     </ResourceDiv>
+
   );
 }

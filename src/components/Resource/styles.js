@@ -7,8 +7,8 @@ export const H2 = styled.h2`
   margin-bottom: 8px;
 
   @media screen and (max-width: 550px) {
-    font-size: 24px;
-    margin-bottom: 12px;
+    font-size: 22px;
+    margin-bottom: 16px;
   }
 `;
 
@@ -32,7 +32,7 @@ export const ResourceDiv = styled.div`
     position: fixed;
     top: 30vh;
     transform: translateX(-50%);
-    padding: 8px;
+    padding: 24px 16px;
     font-size: 16px;
   }
 `;
@@ -42,6 +42,10 @@ export const UL = styled.ul`
   padding: 0;
   margin-bottom: 12px;
   width: 100%;
+
+  @media screen and (max-width: 550px) {
+    margin-bottom: 24px 0;
+  }
 `;
 
 export const LI = styled.li`
