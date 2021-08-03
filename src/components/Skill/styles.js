@@ -10,7 +10,6 @@ export const Img = styled.img`
   width: 72px;
   object-fit: cover;
   filter: ${({ $skillCompleted }) => (($skillCompleted === true) ? 'none' : 'grayscale(100%) brightness(120%)')};
-  
 `;
 
 export const Figcaption = styled.figcaption`

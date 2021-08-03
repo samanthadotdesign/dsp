@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ResourceDiv } from '../Resource/styles.js';
 
 export const Grid = styled.div`
   width: 75vw;
@@ -27,5 +28,13 @@ export const SectionDiv = styled.div`
 
   @media screen and (max-width: 550px) {
     padding: 0 16px 16px 16px;
+  }
+`;
+
+export const HoverResourceDiv = styled.div`
+  position: relative;
+
+  &:hover ${ResourceDiv} {
+    visibility: visible;
   }
 `;

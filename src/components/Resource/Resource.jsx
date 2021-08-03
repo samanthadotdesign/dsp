@@ -9,6 +9,7 @@ import { SecondaryButton } from '../../styles.js';
 // Add resource emoji
 
 // resourceSkill is only for this particular skillId
+
 // Help to create modals for resource divs when in mobile view
 const getWindowDimensions = () => {
   const { innerWidth: width, innerHeight: height } = window;
@@ -46,10 +47,12 @@ export default function Resource({
 }) {
   const [resourceForm, setResourceForm] = useState(false);
   const [addResourceBtn, setAddResourceBtn] = useState(true);
+  const [resourceModalVisible, setResourceModalVisible] = useState(false);
+
   const resourcesForSkillId = resourceSkills[skillId];
 
   const { height, width } = useWindowDimensions();
-  const isWide = (width > 550);
+  const showModalView = (width < 550);
 
   const handleClick = () => {
     axios.put('/skill', { skillId, skillCompleted }).then((result) => {
@@ -87,6 +90,10 @@ export default function Resource({
   const handleShowForm = () => {
     setResourceForm(true);
     setAddResourceBtn(false);
+  };
+
+  const toggleResourceModal = () => {
+    setResourceModalVisible(false);
   };
 
   // If skill is complete, the copy is Uncomplete Skill

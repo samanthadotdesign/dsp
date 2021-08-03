@@ -1,7 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
-import './fonts.scss';
-
 import App from './App.jsx';
 
 // create an element that React will render stuff into

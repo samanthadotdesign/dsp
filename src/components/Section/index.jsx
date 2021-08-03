@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Skill from '../Skill/index.jsx';
 import Resource from '../Resource/Resource.jsx';
-import { Grid, SectionDiv } from './styles.js';
+import { Grid, SectionDiv, HoverResourceDiv } from './styles.js';
 import { H1 } from '../../styles.js';
 
 export default function Section({
@@ -47,7 +47,7 @@ export default function Section({
         <Grid className="grid">
           {/* Map an array of skill objects into divs */}
           {sectionSkills.map((skill) => (
-            <div className="skill">
+            <HoverResourceDiv>
               <Skill
                 skillName={skill.skillName}
                 skillImg={skill.skillImg}
@@ -64,7 +64,7 @@ export default function Section({
                 setSkillCompleted={setSkillCompleted}
                 setCategoriesCompleted={setCategoriesCompleted}
               />
-            </div>
+            </HoverResourceDiv>
           ))}
         </Grid>
 
