@@ -16,6 +16,7 @@ module.exports = merge(common, {
       template: path.resolve(__dirname, '..', 'src', 'index.html'),
       // a favicon can be included in the head. use this config to point to it
       // favicon: resolve(__dirname, '..', 'src', 'favicon.png'),
+      favicon: path.resolve(__dirname, '..', 'public', 'assets/favicon.svg'),
       alwaysWriteToDisk: true,
     }),
   ],

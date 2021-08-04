@@ -6,9 +6,7 @@ import {
 } from './styles.js';
 import { SecondaryButton } from '../../styles.js';
 
-// Add resource emoji
-
-// resourceSkill is only for this particular skillId
+// Add resource emoji or favicon
 
 // Help to create modals for resource divs when in mobile view
 const getWindowDimensions = () => {

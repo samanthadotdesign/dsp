@@ -41,7 +41,7 @@ module.exports = merge(common, {
       // name this file main, so that it does not get automatically requested as a static file
       filename: './main.html',
       template: path.resolve(__dirname, '..', 'src', 'index.html'),
-
+      favicon: path.resolve(__dirname, '..', 'public', 'assets/favicon.svg'),
     }),
   ].filter(Boolean),
 });
